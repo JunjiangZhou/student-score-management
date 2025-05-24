@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zhoujunjiang.grade.mapper.ScoreMapper">
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Score">
+        INSERT INTO score (student_id, course_id, score, semester)
+        VALUES (#{studentId}, #{courseId}, #{score}, #{semester})
+    </insert>
+
+    <update id="updateById" parameterType="org.zhoujunjiang.grade.entity.Score">
+        UPDATE score
+        SET student_id = #{studentId},
+            course_id = #{courseId},
+            score = #{score},
+            semester = #{semester}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM score WHERE id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="org.zhoujunjiang.grade.entity.Score">
+        SELECT * FROM score
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="org.zhoujunjiang.grade.entity.Score">
+        SELECT * FROM score WHERE id = #{id}
+    </select>
+</mapper>

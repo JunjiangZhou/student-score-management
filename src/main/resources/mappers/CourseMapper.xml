@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zhoujunjiang.grade.mapper.CourseMapper">
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Course">
+        INSERT INTO course (course_no, course_name, credit, hours, classroom, teacher_id)
+        VALUES (#{courseNo}, #{courseName}, #{credit}, #{hours}, #{classroom}, #{teacherId})
+    </insert>
+
+    <update id="updateById" parameterType="org.zhoujunjiang.grade.entity.Course">
+        UPDATE course
+        SET course_no = #{courseNo},
+            course_name = #{courseName},
+            credit = #{credit},
+            hours = #{hours},
+            classroom = #{classroom},
+            teacher_id = #{teacherId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM course WHERE id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="org.zhoujunjiang.grade.entity.Course">
+        SELECT * FROM course
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="org.zhoujunjiang.grade.entity.Course">
+        SELECT * FROM course WHERE id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zhoujunjiang.grade.mapper.TeacherMapper">
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Teacher">
+        INSERT INTO teacher (teacher_no, name, title, email, password)
+        VALUES (#{teacherNo}, #{name}, #{title}, #{email}, #{password})
+    </insert>
+
+    <update id="updateById" parameterType="org.zhoujunjiang.grade.entity.Teacher">
+        UPDATE teacher
+        SET teacher_no = #{teacherNo},
+            name = #{name},
+            title = #{title},
+            email = #{email},
+            password = #{password}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM teacher WHERE id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="org.zhoujunjiang.grade.entity.Teacher">
+        SELECT * FROM teacher
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="org.zhoujunjiang.grade.entity.Teacher">
+        SELECT * FROM teacher WHERE id = #{id}
+    </select>
+</mapper>

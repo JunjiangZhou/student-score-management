@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zhoujunjiang.grade.mapper.StudentMapper">
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Student">
+        INSERT INTO student (student_no, name, password, gender, age, class_name)
+        VALUES (#{studentNo}, #{name}, #{password}, #{gender}, #{age}, #{className})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="org.zhoujunjiang.grade.entity.Student">
+        UPDATE student
+        SET name = #{name},
+            password = #{password},
+            gender = #{gender},
+            age = #{age},
+            class_name = #{className}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+
+    <!-- 登录 / 注册 校验用 -->
+    <select id="findByStudentNo" parameterType="String" resultType="org.zhoujunjiang.grade.entity.Student">
+        SELECT * FROM student WHERE student_no = #{studentNo}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="findByPage" resultType="org.zhoujunjiang.grade.entity.Student">
+        SELECT * FROM student
+        ORDER BY id DESC
+            LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+</mapper>
