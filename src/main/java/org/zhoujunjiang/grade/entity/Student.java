@@ -8,5 +8,4 @@ public class Student {
     private String gender;
     private String className;
     private String email;
-    private String password;
 }
