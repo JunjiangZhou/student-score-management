@@ -47,6 +47,18 @@ body {
 .login-container button:hover {
     background-color: #434190;
 }
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.logout {
+    color: green;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
 .register-link {
     margin-top: 15px;
     font-size: 14px;

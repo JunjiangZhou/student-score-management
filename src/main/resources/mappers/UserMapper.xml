@@ -5,7 +5,7 @@
 
 <mapper namespace="org.zhoujunjiang.grade.mapper.UserMapper">
 
-    <select id="findByUsernameAndPassword" resultType="org.zhoujunjiang.entity.User">
+    <select id="findByUsernameAndPassword" resultType="org.zhoujunjiang.grade.entity.User">
         SELECT * FROM users
         WHERE username = #{username} AND password = #{password}
     </select>

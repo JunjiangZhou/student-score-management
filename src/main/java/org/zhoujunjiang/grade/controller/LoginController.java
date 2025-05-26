@@ -5,9 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import jakarta.servlet.http.HttpSession;
 import org.zhoujunjiang.grade.entity.User;
 import org.zhoujunjiang.grade.service.UserService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
