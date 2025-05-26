@@ -17,32 +17,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    /**
-     * 学生注册
-     */
-    @PostMapping("/register")
-    @ResponseBody
-    public Result register(@RequestBody Student student) {
-        boolean success = studentService.register(student);
-        return success ? Result.success("注册成功") : Result.error("注册失败，可能学号已存在");
-    }
-
-    /**
-     * 学生登录
-     */
-    @PostMapping("/login")
-    @ResponseBody
-    public Result login(@RequestParam String studentNo,
-                        @RequestParam String password,
-                        HttpSession session) {
-        Student student = studentService.login(studentNo, password);
-        if (student != null) {
-            session.setAttribute("student", student);
-            return Result.success("登录成功", student);
-        } else {
-            return Result.error("学号或密码错误");
-        }
-    }
 
     /**
      * 分页查询学生

@@ -27,7 +27,7 @@
         DELETE FROM student WHERE id = #{id}
     </delete>
 
-    <!-- 登录 / 注册 校验用 -->
+    <!-- 根据学号查找-->
     <select id="findByStudentNo" parameterType="String" resultType="org.zhoujunjiang.grade.entity.Student">
         SELECT * FROM student WHERE student_no = #{studentNo}
     </select>

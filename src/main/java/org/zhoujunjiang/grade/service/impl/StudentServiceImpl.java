@@ -12,22 +12,7 @@ public class StudentServiceImpl implements StudentService{
     @Autowired
     private StudentMapper studentMapper;
 
-    @Override
-    public boolean register(Student student) {
-        if (findByStudentNo(student.getStudentNo()) != null) {
-            return false; // 学号已存在
-        }
-        return studentMapper.insert(student) > 0;
-    }
 
-    @Override
-    public Student login(String studentNo, String password) {
-        Student student = studentMapper.findByStudentNo(studentNo);
-        if (student != null && password.equals(student.getPassword())) {
-            return student;
-        }
-        return null;
-    }
 
     @Override
     public boolean add(Student student) {

@@ -4,11 +4,6 @@ import org.zhoujunjiang.grade.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    // 注册学生
-    boolean register(Student student);
-
-    // 登录验证
-    Student login(String studentNo, String password);
 
     // 添加学生
     boolean add(Student student);
