@@ -1,6 +1,6 @@
 package org.zhoujunjiang.grade.config;
 
-import org.apache.commons.dbcp.BasicDataSource;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
+import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class AppConfig {
         ds.setUrl("jdbc:mysql://localhost:3306/student_grade_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai");
         ds.setUsername("root");
         ds.setPassword("Mysql4mypj");
-        ds.setMaxActive(20);
+        ds.setMaxTotal(20);
         ds.setMaxIdle(5);
         return ds;
     }
