@@ -5,13 +5,13 @@
 
 <mapper namespace="org.zhoujunjiang.grade.mapper.UserMapper">
     <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.User">
-        INSERT INTO users (username, password, role)
-        VALUES (#{username}, #{password}, #{role})
+        INSERT INTO user (username, password)
+        VALUES (#{username}, #{password})
     </insert>
 
 
     <select id="findByUsername" resultType="org.zhoujunjiang.grade.entity.User">
-        SELECT * FROM users
+        SELECT * FROM user
         WHERE username = #{username}
     </select>
 </mapper>

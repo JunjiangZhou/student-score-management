@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/login", "/css/**").permitAll() // 放行登录页和静态资源
+                        .antMatchers("/login", "/css/**","/register").permitAll() // 放行登录页和静态资源
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
