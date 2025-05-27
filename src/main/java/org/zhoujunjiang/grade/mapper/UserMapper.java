@@ -6,4 +6,5 @@ import org.zhoujunjiang.grade.entity.User;
 public interface UserMapper {
 
     User findByUsername(@Param("username") String username);
+    void insert(User user);
 }

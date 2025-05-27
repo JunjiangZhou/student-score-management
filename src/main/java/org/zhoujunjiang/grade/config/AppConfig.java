@@ -18,6 +18,7 @@ import java.io.IOException;
 @EnableTransactionManagement
 public class AppConfig {
 
+    @SuppressWarnings("ContextJavaBeanUnresolvedMethodsInspection")
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();

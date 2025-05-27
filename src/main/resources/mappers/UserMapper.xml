@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zhoujunjiang.grade.mapper.UserMapper">
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.User">
+        INSERT INTO users (username, password, role)
+        VALUES (#{username}, #{password}, #{role})
+    </insert>
 
 
     <select id="findByUsername" resultType="org.zhoujunjiang.grade.entity.User">
