@@ -68,6 +68,12 @@
       <version>1.4</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.mysql</groupId> <!-- 或者其他数据库驱动 -->
+      <artifactId>mysql-connector-j</artifactId>
+      <version>8.0.33</version>
+    </dependency>
+
     <!-- Servlet 和 JSP 支持 -->
     <dependency>
       <groupId>javax.servlet</groupId>
