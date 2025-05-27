@@ -2,14 +2,14 @@ package org.zhoujunjiang.grade.service.impl;
 import org.zhoujunjiang.grade.entity.Student;
 import org.zhoujunjiang.grade.mapper.StudentMapper;
 import org.zhoujunjiang.grade.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-    @Autowired
+    @Resource
     private StudentMapper studentMapper;
 
 

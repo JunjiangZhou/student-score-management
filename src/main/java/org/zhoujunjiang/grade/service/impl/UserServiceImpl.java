@@ -1,15 +1,16 @@
 package org.zhoujunjiang.grade.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zhoujunjiang.grade.entity.User;
 import org.zhoujunjiang.grade.mapper.UserMapper;
 import org.zhoujunjiang.grade.service.UserService;
 
+import javax.annotation.Resource;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+@Resource
     private UserMapper userMapper;
 
 
