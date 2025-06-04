@@ -12,6 +12,7 @@
         <result property="gender" column="gender"/>
         <result property="className" column="class_name"/>
         <result property="email" column="email"/>
+        <result property="age" column="age"/>
     </resultMap>
 
     <!-- 查询所有学生 -->
@@ -26,8 +27,8 @@
 
     <!-- 插入新学生 -->
     <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Student">
-        INSERT INTO students (student_no, name, gender, class_name, email)
-        VALUES (#{studentNo}, #{name}, #{gender}, #{className}, #{email})
+        INSERT INTO students (student_no, name, gender, class_name, email, age)
+        VALUES (#{studentNo}, #{name}, #{gender}, #{className}, #{email}, #{age})
     </insert>
 
     <!-- 更新学生 -->
@@ -37,7 +38,8 @@
             name = #{name},
             gender = #{gender},
             class_name = #{className},
-            email = #{email}
+            email = #{email},
+            age = #{age}
         WHERE id = #{id}
     </update>
 
