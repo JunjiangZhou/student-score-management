@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zhoujunjiang.grade.mapper.TeacherMapper">
+
+    <resultMap id="TeacherResultMap" type="org.zhoujunjiang.grade.entity.Teacher">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="teacherNo" column="teacher_no" />
+        <result property="department" column="department" />
+        <result property="age" column="age" />
+        <result property="gender" column="gender" />
+        <result property="title" column="title" />
+        <result property="email" column="email" />
+        <result property="hire_Date" column="hire_date" />
+    </resultMap>
+
+    <select id="findAll" resultMap="TeacherResultMap">
+        SELECT * FROM teacher
+    </select>
+
+    <select id="findById" resultMap="TeacherResultMap">
+        SELECT * FROM teacher WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Teacher">
+        INSERT INTO teacher (name, teacher_no, department, age, gender, title, email, hire_date)
+        VALUES (#{name}, #{teacherNo}, #{department}, #{age}, #{gender}, #{title}, #{email}, #{hire_Date})
+    </insert>
+
+    <update id="update" parameterType="org.zhoujunjiang.grade.entity.Teacher">
+        UPDATE teacher
+        SET name = #{name},
+            teacher_no = #{teacherNo},
+            department = #{department},
+            age = #{age},
+            gender = #{gender},
+            title = #{title},
+            email = #{email},
+            hire_date = #{hire_Date}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM teacher WHERE id = #{id}
+    </delete>
+
+</mapper>
