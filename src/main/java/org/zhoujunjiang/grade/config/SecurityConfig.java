@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login") // 提交地址（必须和 form action 一致）
-                        .defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/index", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )

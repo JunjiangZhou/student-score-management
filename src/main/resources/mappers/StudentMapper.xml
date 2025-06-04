@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zhoujunjiang.grade.mapper.StudentMapper">
 
-    <!-- 插入 -->
+    <!-- 结果映射 -->
+    <resultMap id="StudentResultMap" type="org.zhoujunjiang.grade.entity.Student">
+        <id property="id" column="id"/>
+        <result property="studentNo" column="student_no"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="className" column="class_name"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <!-- 查询所有学生 -->
+    <select id="findAll" resultMap="StudentResultMap">
+        SELECT * FROM students ORDER BY id
+    </select>
+
+    <!-- 通过ID查询 -->
+    <select id="findById" parameterType="long" resultMap="StudentResultMap">
+        SELECT * FROM students WHERE id = #{id}
+    </select>
+
+    <!-- 插入新学生 -->
     <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Student">
-        INSERT INTO student (student_no, name, password, gender, age, class_name)
-        VALUES (#{studentNo}, #{name}, #{password}, #{gender}, #{age}, #{className})
+        INSERT INTO students (student_no, name, gender, class_name, email)
+        VALUES (#{studentNo}, #{name}, #{gender}, #{className}, #{email})
     </insert>
 
-    <!-- 修改 -->
+    <!-- 更新学生 -->
     <update id="update" parameterType="org.zhoujunjiang.grade.entity.Student">
-        UPDATE student
-        SET name = #{name},
-            password = #{password},
+        UPDATE students
+        SET student_no = #{studentNo},
+            name = #{name},
             gender = #{gender},
-            age = #{age},
-            class_name = #{className}
+            class_name = #{className},
+            email = #{email}
         WHERE id = #{id}
     </update>
 
-    <!-- 删除 -->
-    <delete id="deleteById" parameterType="int">
-        DELETE FROM student WHERE id = #{id}
+    <!-- 删除学生 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM students WHERE id = #{id}
     </delete>
-
-    <!-- 根据学号查找-->
-    <select id="findByStudentNo" parameterType="String" resultType="org.zhoujunjiang.grade.entity.Student">
-        SELECT * FROM student WHERE student_no = #{studentNo}
-    </select>
-
-    <!-- 分页查询 -->
-    <select id="findByPage" resultType="org.zhoujunjiang.grade.entity.Student">
-        SELECT * FROM student
-        ORDER BY id DESC
-            LIMIT #{limit} OFFSET #{offset}
-    </select>
 
 </mapper>
