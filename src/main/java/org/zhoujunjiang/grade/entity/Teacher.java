@@ -8,6 +8,8 @@ public class Teacher {
     private Integer id;
     private String name;
     private String teacherNo;
+    private String department;
+    private Integer age;
     private String gender;
     private String title;
     private String email;
