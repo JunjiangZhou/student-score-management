@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zhoujunjiang.grade.mapper.EnrollmentMapper">
+
+    <!-- 插入选课记录 -->
+    <insert id="save">
+        INSERT INTO enrollment (student_id, course_id)
+        VALUES (#{studentId}, #{courseId})
+    </insert>
+
+    <!-- 检查是否已选课 -->
+    <select id="exists" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM enrollment
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </select>
+
+    <!-- 按课程聚类列出课程及人数 -->
+    <select id="findAllCoursesWithEnrollment" resultType="org.zhoujunjiang.grade.vo.CourseEnrollmentSummaryVO">
+        SELECT c.id AS courseId,
+               c.name AS courseName,
+               t.name AS teacherName,
+               COUNT(e.id) AS enrollmentCount
+        FROM course c
+                 LEFT JOIN teacher t ON c.teacher_id = t.id
+                 LEFT JOIN enrollment e ON c.id = e.course_id
+        GROUP BY c.id, c.name, t.name
+    </select>
+
+    <!-- 查看指定课程已选学生列表 -->
+    <select id="findStudentsByCourseId" resultType="org.zhoujunjiang.grade.vo.EnrollmentDetailVO">
+        SELECT s.id AS studentId,
+               s.name AS studentName,
+               s.student_no AS studentNo
+        FROM enrollment e
+                 JOIN student s ON e.student_id = s.id
+        WHERE e.course_id = #{courseId}
+    </select>
+
+</mapper>
