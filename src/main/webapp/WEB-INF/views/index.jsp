@@ -17,7 +17,7 @@
         <li><a href="<c:url value='/enrollments' />">选课信息管理</a></li>
         <li><a href="<c:url value='/grades' />">成绩管理</a></li>
         <li><a href="<c:url value='/grades/statistics/score-distribution' />">统计与查询</a></li>
-        <li><a href="<c:url value='/logout' />">退出系统</a></li>
+        <li><a href="${pageContext.request.contextPath}/logout">退出系统</a></li>
     </ul>
 </nav>
 
