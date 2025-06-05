@@ -40,4 +40,8 @@
         WHERE e.course_id = #{courseId}
     </select>
 
+    <select id="findAll" resultMap="enrollmentResultMap">
+        SELECT * FROM enrollment
+    </select>
+
 </mapper>

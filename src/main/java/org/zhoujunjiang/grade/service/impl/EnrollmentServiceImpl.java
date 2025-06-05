@@ -1,6 +1,7 @@
 package org.zhoujunjiang.grade.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.zhoujunjiang.grade.entity.Enrollment;
 import org.zhoujunjiang.grade.mapper.EnrollmentMapper;
 import org.zhoujunjiang.grade.service.EnrollmentService;
 import org.zhoujunjiang.grade.vo.CourseEnrollmentSummaryVO;
@@ -24,6 +25,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public boolean exists(Integer studentId, Integer courseId) {
         return enrollmentMapper.exists(studentId, courseId);
     }
+
+    @Override
+    public List<Enrollment> findAll() {
+        return enrollmentMapper.findAll(); // 假设已定义 mapper 方法
+    }
+
 
     @Override
     public List<CourseEnrollmentSummaryVO> findAllCoursesWithEnrollment() {

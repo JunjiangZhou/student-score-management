@@ -1,6 +1,7 @@
 package org.zhoujunjiang.grade.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.zhoujunjiang.grade.entity.Enrollment;
 import org.zhoujunjiang.grade.vo.CourseEnrollmentSummaryVO;
 import org.zhoujunjiang.grade.vo.EnrollmentDetailVO;
 
@@ -15,4 +16,6 @@ public interface EnrollmentMapper {
     List<CourseEnrollmentSummaryVO> findAllCoursesWithEnrollment();
 
     List<EnrollmentDetailVO> findStudentsByCourseId(@Param("courseId") Integer courseId);
+
+    List<Enrollment> findAll();
 }

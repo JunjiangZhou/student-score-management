@@ -1,0 +1,46 @@
+<mapper namespace="org.zhoujunjiang.grade.mapper.GradeMapper">
+
+    <resultMap id="gradeResultMap" type="org.zhoujunjiang.grade.entity.Grade">
+        <id property="id" column="id"/>
+        <result property="enrollmentId" column="enrollment_id"/>
+        <result property="score" column="score"/>
+        <result property="grade" column="grade"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="gradeResultMap">
+        SELECT * FROM grade
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="gradeResultMap">
+        SELECT * FROM grade WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Grade">
+        INSERT INTO grade (enrollment_id, score, grade)
+        VALUES (#{enrollmentId}, #{score}, #{grade})
+    </insert>
+
+    <update id="update" parameterType="org.zhoujunjiang.grade.entity.Grade">
+        UPDATE grade
+        SET score = #{score}, grade = #{grade}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM grade WHERE id = #{id}
+    </delete>
+    <select id="getCourseScoreDistributions" resultType="org.zhoujunjiang.grade.dto.CourseScoreDistributionDTO">
+        SELECT
+        c.name AS courseName,
+        ROUND(AVG(g.score), 1) AS averageScore,
+        SUM(CASE WHEN g.score BETWEEN 0 AND 59 THEN 1 ELSE 0 END) AS range0to59,
+        SUM(CASE WHEN g.score BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS range60to69,
+        SUM(CASE WHEN g.score BETWEEN 70 AND 79 THEN 1 ELSE 0 END) AS range70to79,
+        SUM(CASE WHEN g.score BETWEEN 80 AND 89 THEN 1 ELSE 0 END) AS range80to89,
+        SUM(CASE WHEN g.score BETWEEN 90 AND 100 THEN 1 ELSE 0 END) AS range90to100
+        FROM grade g
+        JOIN course c ON g.course_id = c.id
+        GROUP BY g.course_id
+    </select>
+
+</mapper>
