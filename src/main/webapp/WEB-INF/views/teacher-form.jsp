@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>教师信息表单</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>${teacher.id == null ? '添加教师' : '编辑教师'}</h2>

@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>新增选课</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>添加选课记录</h2>

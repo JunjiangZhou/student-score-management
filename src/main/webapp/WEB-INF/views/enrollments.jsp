@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>选课信息管理</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>课程选课总览</h2>

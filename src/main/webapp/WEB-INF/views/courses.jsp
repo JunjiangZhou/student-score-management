@@ -9,7 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head><title>课程管理</title></head>
+<head>
+    <title>课程管理</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
+</head>
 <body>
 <h2>课程信息列表</h2>
 <a href="<c:url value='/courses/new' />">添加课程</a>

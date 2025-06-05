@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>学生信息表单</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>${student.id == null ? '添加学生' : '编辑学生'}</h2>

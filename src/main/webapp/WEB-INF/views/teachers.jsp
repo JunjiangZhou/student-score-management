@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>教师列表</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>教师信息列表</h2>

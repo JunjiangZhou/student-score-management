@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>课程详情</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>已选学生列表（${courseName}）</h2>

@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>课程信息表单</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>${course.id == null ? '添加课程' : '编辑课程'}</h2>

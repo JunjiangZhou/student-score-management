@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>学生信息管理</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>学生信息管理</h2>
