@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class PhoneUser {
-    private int id;
+    private Integer id;
     private String phone;
-    private String code;
 }

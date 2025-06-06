@@ -4,5 +4,5 @@ import org.zhoujunjiang.grade.entity.PhoneUser;
 
 public interface PhoneUserService {
     PhoneUser findByPhone(String phone);
-    void save(PhoneUser phoneUser);
+    void insert(PhoneUser user);
 }

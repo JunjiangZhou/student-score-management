@@ -39,6 +39,11 @@
         还没有账号？
         <a href="${pageContext.request.contextPath}/register">立即注册</a>
     </div>
+
+    <!-- 手机登录链接 -->
+    <div class="phone-login-link">
+        <a href="${pageContext.request.contextPath}/phone/login">手机号登录</a>
+    </div>
 </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package org.zhoujunjiang.grade.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,45 +9,44 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.zhoujunjiang.grade.entity.PhoneUser;
 import org.zhoujunjiang.grade.service.PhoneUserService;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import javax.servlet.http.HttpSession;
+import org.zhoujunjiang.grade.service.SmsService;
+
 import java.util.Collections;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/phone")
 public class PhoneLoginController {
-
     @Autowired
     private PhoneUserService phoneUserService;
-
     @Autowired
-    private JedisPool jedisPool;
+    private SmsService smsService;
 
     @GetMapping("/login")
-    public String showPhoneLoginPage() {
-        return "phone_login"; // 修正视图名称与实际文件名匹配
+    public String loginPage() {
+        return "phone-login";
     }
 
     @PostMapping("/verify")
-    public String verifyLogin(@RequestParam String phone,
-                              @RequestParam String code,
-                              HttpSession session,
-                              Model model) {
-        try (Jedis jedis = jedisPool.getResource()) {
-            String storedCode = jedis.get("login:code:" + phone);
-            if (storedCode != null && storedCode.equals(code)) {
-                PhoneUser user = phoneUserService.findByPhone(phone);
-                if (user != null) {
-                    session.setAttribute("user", user);
-                    UsernamePasswordAuthenticationToken auth =
-                            new UsernamePasswordAuthenticationToken(phone, null, Collections.emptyList());
-                    SecurityContextHolder.getContext().setAuthentication(auth);
-                    return "redirect:/index";
-                }
-            }
+    public String verify(@RequestParam String phone,
+                         @RequestParam String code,
+                         Model model) {
+
+        if (!smsService.verifyCode(phone, code)) {
+            model.addAttribute("error", "验证码错误或已过期");
+            return "phone-login";
         }
-        model.addAttribute("error", "手机号或验证码错误");
-        return "phone_login";
+
+        PhoneUser user = phoneUserService.findByPhone(phone);
+        if (user == null) {
+            user = new PhoneUser();
+            user.setPhone(phone);
+            phoneUserService.insert(user);
+        }
+
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                phone, null, Collections.emptyList());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return "redirect:/index";
     }
 }

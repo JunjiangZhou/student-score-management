@@ -64,7 +64,7 @@ public class AppConfig {
 
         @Bean
         public JedisPool jedisPool() {
-            return new JedisPool("localhost", 6379);
+            return new JedisPool(new JedisPoolConfig(), "localhost", 6379);
         }
     }
 }

@@ -17,12 +17,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/login", "/css/**","/register","/phone/**").permitAll() // 放行登录页和静态资源
+                        .antMatchers("/login", "/css/**", "/register", "/phone/**", "/api/sms/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login") // 提交地址（必须和 form action 一致）
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/index", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
                 )
-                .csrf().disable(); // 如果不涉及复杂请求，可关闭 CSRF 方便调试
+                .csrf().disable();
 
         return http.build();
     }

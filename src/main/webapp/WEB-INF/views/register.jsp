@@ -15,11 +15,19 @@
 <body>
 <div class="login-container">
     <h2>用户注册</h2>
+
+    <!-- 注册表单 -->
     <form action="${pageContext.request.contextPath}/register" method="post">
         <input type="text" name="username" placeholder="用户名" required />
         <input type="password" name="password" placeholder="密码" required />
         <button type="submit">注册</button>
     </form>
+
+    <!-- 手机注册链接 -->
+    <div class="phone-register-link">
+        <a href="${pageContext.request.contextPath}/phone/login">手机号注册/登录</a>
+    </div>
+
     <p class="register-link">
         已有账号？<a href="${pageContext.request.contextPath}/login">返回登录</a>
     </p>
