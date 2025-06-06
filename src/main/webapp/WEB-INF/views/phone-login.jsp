@@ -1,21 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: zhoujunjiang
-  Date: 2025/6/6
-  Time: 下午8:32
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head><title>手机号登录</title></head>
+<head>
+    <title>手机号登录</title>
+    <meta charset="UTF-8">
+</head>
 <body>
-<form action="<c:url value="/phone/verify"/>" method="post">
-    <label>手机号：<input type="text" name="phone"/></label><br/>
+<h2>手机号验证码登录</h2>
+
+<!-- 登录表单 -->
+<form action="<c:url value='/phone/verify'/>" method="post">
+    <label>手机号：<input type="text" name="phone" id="phoneInput"/></label><br/>
     <label>验证码：<input type="text" name="code"/></label><br/>
     <button type="submit">登录</button>
 </form>
-<input type="text" id="phoneInput" placeholder="手机号"/>
+
+<!-- 验证码发送按钮 -->
 <button type="button" onclick="sendCode()">发送验证码</button>
 <p id="sms-status"></p>
 
@@ -30,7 +30,7 @@ function sendCode() {
     fetch("<c:url value='/api/sms/send'/>", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
         },
         body: "phone=" + encodeURIComponent(phone)
     })
@@ -43,6 +43,8 @@ function sendCode() {
     });
 }
 </script>
+
+<!-- 登录失败信息提示 -->
 <c:if test="${not empty error}">
     <p style="color:red">${error}</p>
 </c:if>
