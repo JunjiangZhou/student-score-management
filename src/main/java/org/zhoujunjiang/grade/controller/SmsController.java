@@ -19,11 +19,7 @@ public class SmsController {
     private final SmsService smsService;
     private final JedisPool jedisPool;
 
-    public SmsController(SmsService smsService, JedisPool jedisPool) {
-        this.smsService = smsService;
-        this.jedisPool = jedisPool;
-    }
-
+    
     @PostMapping("/send")
     public Map<String, Object> sendSms(@RequestParam String phone) {
         String code = String.valueOf(new Random().nextInt(9000) + 1000); // 生成4位验证码

@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.zhoujunjiang.grade.entity.PhoneUser;
-import org.zhoujunjiang.grade.mapper.PhoneUserMapper;
+import org.zhoujunjiang.grade.service.PhoneUserService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
@@ -19,7 +20,7 @@ import java.util.Collections;
 public class PhoneLoginController {
 
     @Autowired
-    private PhoneUserMapper phoneUserMapper;
+    private PhoneUserService phoneUserService;
 
     @Autowired
     private JedisPool jedisPool;
@@ -37,7 +38,7 @@ public class PhoneLoginController {
         try (Jedis jedis = jedisPool.getResource()) {
             String storedCode = jedis.get("login:code:" + phone);
             if (storedCode != null && storedCode.equals(code)) {
-                PhoneUser user = phoneUserMapper.findByPhone(phone);
+                PhoneUser user = phoneUserService.findByPhone(phone);
                 if (user != null) {
                     session.setAttribute("user", user);
                     UsernamePasswordAuthenticationToken auth =
