@@ -73,4 +73,14 @@ public class AppConfig {
             return new JedisPool(config, "localhost", 6379);
         }
     }
+    @Bean
+    public TencentSmsConfig tencentSmsConfig() {
+        TencentSmsConfig config = new TencentSmsConfig();
+        config.setSecretId("你的SecretId");
+        config.setSecretKey("你的SecretKey");
+        config.setAppId("1400xxxxxx");
+        config.setSignName("你的签名");
+        config.setTemplateId("1110");
+        return config;
+    }
 }

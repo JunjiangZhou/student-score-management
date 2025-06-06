@@ -25,7 +25,7 @@ public class PhoneLoginController {
 
     @GetMapping("/login")
     public String showPhoneLoginPage() {
-        return "phone-login";
+        return "phone_login"; // 修正视图名称与实际文件名匹配
     }
 
     @PostMapping("/verify")

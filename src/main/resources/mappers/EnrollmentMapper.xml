@@ -2,8 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="org.zhoujunjiang.grade.mapper.EnrollmentMapper">
+    <!-- 结果映射 -->
+    <resultMap id="enrollmentResultMap" type="org.zhoujunjiang.grade.entity.Enrollment">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="semester" property="semester"/>
+    </resultMap>
 
     <!-- 插入选课记录 -->
     <insert id="save">
@@ -43,5 +49,4 @@
     <select id="findAll" resultMap="enrollmentResultMap">
         SELECT * FROM enrollment
     </select>
-
 </mapper>

@@ -1,6 +1,7 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zhoujunjiang.grade.mapper.GradeMapper">
 
-    <resultMap id="gradeResultMap" type="org.zhoujunjiang.grade.entity.Grade">
+<resultMap id="gradeResultMap" type="org.zhoujunjiang.grade.entity.Grade">
         <id property="id" column="id"/>
         <result property="enrollmentId" column="enrollment_id"/>
         <result property="score" column="score"/>
