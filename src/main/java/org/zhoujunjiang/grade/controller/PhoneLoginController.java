@@ -10,8 +10,6 @@ import org.zhoujunjiang.grade.entity.PhoneUser;
 import org.zhoujunjiang.grade.service.PhoneUserService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
