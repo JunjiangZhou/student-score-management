@@ -47,6 +47,6 @@ public class PhoneLoginController {
             }
         }
         model.addAttribute("error", "手机号或验证码错误");
-        return "phone-login";
+        return "phone_login";
     }
 }

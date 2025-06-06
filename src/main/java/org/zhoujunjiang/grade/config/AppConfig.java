@@ -64,23 +64,7 @@ public class AppConfig {
 
         @Bean
         public JedisPool jedisPool() {
-            JedisPoolConfig config = new JedisPoolConfig();
-            config.setMaxTotal(20);      // 最大连接数
-            config.setMaxIdle(10);       // 最大空闲数
-            config.setMinIdle(2);        // 最小空闲数
-
-            // 连接本地 Redis（默认端口6379）
-            return new JedisPool(config, "localhost", 6379);
+            return new JedisPool("localhost", 6379);
         }
-    }
-    @Bean
-    public TencentSmsConfig tencentSmsConfig() {
-        TencentSmsConfig config = new TencentSmsConfig();
-        config.setSecretId("你的SecretId");
-        config.setSecretKey("你的SecretKey");
-        config.setAppId("1400xxxxxx");
-        config.setSignName("你的签名");
-        config.setTemplateId("1110");
-        return config;
     }
 }
