@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
 import java.io.IOException;
-
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @ComponentScan(basePackages = {"org.zhoujunjiang.grade.service"})
 @EnableTransactionManagement
@@ -57,5 +58,19 @@ public class AppConfig {
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
+    }
+    @Configuration
+    public class RedisConfig {
+
+        @Bean
+        public JedisPool jedisPool() {
+            JedisPoolConfig config = new JedisPoolConfig();
+            config.setMaxTotal(20);      // 最大连接数
+            config.setMaxIdle(10);       // 最大空闲数
+            config.setMinIdle(2);        // 最小空闲数
+
+            // 连接本地 Redis（默认端口6379）
+            return new JedisPool(config, "localhost", 6379);
+        }
     }
 }

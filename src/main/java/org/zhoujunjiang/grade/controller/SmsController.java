@@ -3,6 +3,9 @@ package org.zhoujunjiang.grade.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.zhoujunjiang.grade.service.SmsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +17,12 @@ import java.util.Random;
 public class SmsController {
 
     private final SmsService smsService;
+    private final JedisPool jedisPool;
+
+    public SmsController(SmsService smsService, JedisPool jedisPool) {
+        this.smsService = smsService;
+        this.jedisPool = jedisPool;
+    }
 
     @PostMapping("/send")
     public Map<String, Object> sendSms(@RequestParam String phone) {
@@ -23,7 +32,9 @@ public class SmsController {
         result.put("success", success);
         if (success) {
             result.put("message", "验证码已发送");
-            // TODO: 保存 code 和 phone 到 Redis（可选）
+            try (Jedis jedis = jedisPool.getResource()) {
+                jedis.setex("sms:code:" + phone, 300, code); // 有效期5分钟
+            }
         } else {
             result.put("message", "发送失败");
         }

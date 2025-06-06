@@ -7,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.zhoujunjiang.grade.entity.PhoneUser;
-import org.zhoujunjiang.grade.entity.User;
 import org.zhoujunjiang.grade.mapper.PhoneUserMapper;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
@@ -20,10 +21,12 @@ public class PhoneLoginController {
     @Autowired
     private PhoneUserMapper phoneUserMapper;
 
+    @Autowired
+    private JedisPool jedisPool;
 
     @GetMapping("/login")
     public String showPhoneLoginPage() {
-        return "phone-login"; // 视图 JSP 页面
+        return "phone-login";
     }
 
     @PostMapping("/verify")
@@ -31,20 +34,20 @@ public class PhoneLoginController {
                               @RequestParam String code,
                               HttpSession session,
                               Model model) {
-        // TODO: 建议用 Redis 检查验证码
-        PhoneUser user = phoneUserMapper.findByPhone(phone);
-        if (user != null && code.equals(user.getCode())) {
-            session.setAttribute("user", user);
-            org.springframework.security.core.userdetails.User userDetails =
-                    new org.springframework.security.core.userdetails.User(user.getPhone(), "", Collections.emptyList());
-            UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
-
-            return "redirect:/index";
-        } else {
-            model.addAttribute("error", "手机号或验证码错误");
-            return "phone-login";
+        try (Jedis jedis = jedisPool.getResource()) {
+            String storedCode = jedis.get("login:code:" + phone);
+            if (storedCode != null && storedCode.equals(code)) {
+                PhoneUser user = phoneUserMapper.findByPhone(phone);
+                if (user != null) {
+                    session.setAttribute("user", user);
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(phone, null, Collections.emptyList());
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                    return "redirect:/index";
+                }
+            }
         }
+        model.addAttribute("error", "手机号或验证码错误");
+        return "phone-login";
     }
 }
