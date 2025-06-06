@@ -1,0 +1,9 @@
+<mapper namespace="org.zhoujunjiang.grade.mapper.PhoneUserMapper">
+    <select id="findByPhone" resultType="org.zhoujunjiang.grade.entity.PhoneUser">
+        SELECT * FROM phone_user WHERE phone = #{phone}
+    </select>
+
+    <insert id="save">
+        INSERT INTO phone_user (phone) VALUES (#{phone})
+    </insert>
+</mapper>
