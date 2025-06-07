@@ -20,7 +20,7 @@ import java.io.IOException;
 @Service
 public class QiniuService {
 
-    @Resource
+    @Autowired
     private QiniuConfig config;
 
     public String upload(MultipartFile file) throws IOException {

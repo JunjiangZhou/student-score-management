@@ -1,10 +1,11 @@
 package org.zhoujunjiang.grade.config;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+
 
 @Data
-@Component
+@Configuration
 public class QiniuConfig {
     private String accessKey = "PnJHPmOA8ew21dM9vnHS-qUuomfzLnVBvtCKhdZ8";
     private String secretKey = "9doe8GZQrME6Co123wPglm6qGZdcqwRHFQr8RzDL";

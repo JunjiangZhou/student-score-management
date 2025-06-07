@@ -15,7 +15,7 @@ import java.io.IOException;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 @Configuration
-@ComponentScan(basePackages = {"org.zhoujunjiang.grade.service"})
+@ComponentScan(basePackages = {"org.zhoujunjiang.grade.service","org.zhoujunjiang.grade.config"})
 @EnableTransactionManagement
 public class AppConfig {
 
