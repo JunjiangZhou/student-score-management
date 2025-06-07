@@ -1,6 +1,6 @@
 package org.zhoujunjiang.grade.config;
 
-
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -66,5 +66,12 @@ public class AppConfig {
         public JedisPool jedisPool() {
             return new JedisPool(new JedisPoolConfig(), "localhost", 6379);
         }
+    }
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        resolver.setMaxUploadSize(10 * 1024 * 1024); // 设置最大上传大小为10MB
+        return resolver;
     }
 }
