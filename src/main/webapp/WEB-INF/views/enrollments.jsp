@@ -40,5 +40,6 @@
 </table>
 
 <a href="<c:url value='/enrollments/new' />">新增选课记录</a>
+<a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>

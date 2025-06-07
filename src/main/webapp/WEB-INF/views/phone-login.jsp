@@ -48,5 +48,6 @@ function sendCode() {
 <c:if test="${not empty error}">
     <p style="color:red">${error}</p>
 </c:if>
+<a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>

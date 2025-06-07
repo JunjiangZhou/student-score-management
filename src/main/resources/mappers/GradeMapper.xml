@@ -40,8 +40,8 @@
         SUM(CASE WHEN g.score BETWEEN 80 AND 89 THEN 1 ELSE 0 END) AS range80to89,
         SUM(CASE WHEN g.score BETWEEN 90 AND 100 THEN 1 ELSE 0 END) AS range90to100
         FROM grade g
-        JOIN course c ON g.course_id = c.id
-        GROUP BY g.course_id
+        JOIN course c ON g.enrollment_id = c.id
+        GROUP BY g.enrollment_id
     </select>
 
 </mapper>

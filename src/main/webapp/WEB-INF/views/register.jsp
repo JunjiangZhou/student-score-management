@@ -32,5 +32,6 @@
         已有账号？<a href="${pageContext.request.contextPath}/login">返回登录</a>
     </p>
 </div>
+<a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>

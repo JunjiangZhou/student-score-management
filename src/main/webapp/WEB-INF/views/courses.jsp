@@ -38,6 +38,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href="<c:url value='/' />">返回首页</a>
+<a href="<c:url value='/index' />">返回首页</a>
 </body>
 </html>

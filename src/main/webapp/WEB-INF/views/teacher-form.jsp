@@ -31,5 +31,6 @@
     <button type="submit">保存</button>
     <a href="<c:url value='/teachers' />">取消</a>
 </form>
+<a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>

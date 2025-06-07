@@ -8,7 +8,6 @@
         <id column="id" property="id"/>
         <result column="student_id" property="studentId"/>
         <result column="course_id" property="courseId"/>
-        <result column="semester" property="semester"/>
     </resultMap>
 
     <!-- 插入选课记录 -->
@@ -31,7 +30,7 @@
                t.name AS teacherName,
                COUNT(e.id) AS enrollmentCount
         FROM course c
-                 LEFT JOIN teacher t ON c.teacher_id = t.id
+                 LEFT JOIN teacher t ON c.teacherId = t.id
                  LEFT JOIN enrollment e ON c.id = e.course_id
         GROUP BY c.id, c.name, t.name
     </select>

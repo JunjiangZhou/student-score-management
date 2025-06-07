@@ -38,5 +38,6 @@
         </tr>
     </c:forEach>
 </table>
+<a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>
