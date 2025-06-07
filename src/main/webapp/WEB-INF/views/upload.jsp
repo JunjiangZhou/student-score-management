@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>上传文件</title>
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />" />
 </head>
 <body>
 <h2>上传课程资料</h2>
