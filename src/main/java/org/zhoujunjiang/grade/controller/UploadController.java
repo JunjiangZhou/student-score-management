@@ -29,4 +29,9 @@ public class UploadController {
         }
         return "upload";
     }
+    @GetMapping("/files")
+    public String listFiles(Model model) {
+        model.addAttribute("fileUrls", qiniuService.listFileUrls());
+        return "file-list";
+    }
 }

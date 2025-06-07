@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: zhoujunjiang
@@ -25,7 +26,7 @@
 <c:if test="${not empty error}">
     <p style="color: red">${error}</p>
 </c:if>
-
+<a href="<c:url value='/files' />">文件下载</a>
 <a href="${pageContext.request.contextPath}/index">返回首页</a>
 </body>
 </html>

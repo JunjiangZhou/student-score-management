@@ -2,10 +2,13 @@ package org.zhoujunjiang.grade.service;
 
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.model.DefaultPutRet;
+import com.qiniu.storage.model.FileInfo;
+import com.qiniu.storage.model.FileListing;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +19,8 @@ import org.zhoujunjiang.grade.config.QiniuConfig;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class QiniuService {
@@ -38,6 +43,23 @@ public class QiniuService {
             return config.getDomain() + "/" + putRet.key;
         } catch (QiniuException e) {
             throw new RuntimeException("上传失败：" + e.response.toString());
+        }
+    }
+    public List<String> listFileUrls() {
+        Configuration cfg = new Configuration(Region.huadong());
+        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
+        try {
+            BucketManager bucketManager = new BucketManager(auth, cfg);
+            FileListing fileListing = bucketManager.listFiles(config.getBucket(), "", "", 100, null);
+
+            List<String> urls = new ArrayList<>();
+            for (FileInfo fileInfo : fileListing.items) {
+                urls.add(config.getDomain() + "/" + fileInfo.key);
+            }
+            return urls;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }
