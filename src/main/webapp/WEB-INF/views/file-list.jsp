@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +17,21 @@
 <div class="page-container">
     <h2>上传文件列表</h2>
 
-    <c:if test="${empty fileUrls}">
+    <%-- 修复：检查正确的变量名 fileList 而不是 fileUrls --%>
+    <c:if test="${empty fileList}">
         <p>当前没有文件。</p>
     </c:if>
 
-    <ul>
-        <c:forEach var="file" items="${fileList}">
-            <li>
-                <a href="${file.url}" target="_blank">${file.name}</a>
-            </li>
-        </c:forEach>
-    </ul>
+    <%-- 修复：只有在有文件时才显示列表 --%>
+    <c:if test="${not empty fileList}">
+        <ul>
+            <c:forEach var="file" items="${fileList}">
+                <li>
+                    <a href="${file.url}" target="_blank">${file.name}</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
 
     <br>
     <a href="<c:url value='/upload' />" class="action-buttons">返回上传页面</a>

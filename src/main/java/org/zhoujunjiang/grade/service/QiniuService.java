@@ -40,7 +40,8 @@ public class QiniuService {
         try {
             Response response = uploadManager.put(file.getBytes(), key, token);
             DefaultPutRet putRet = new ObjectMapper().readValue(response.bodyString(), DefaultPutRet.class);
-            return config.getDomain() + "/" + putRet.key;
+            // 修复：添加HTTP协议前缀
+            return "http://" + config.getDomain() + "/" + putRet.key;
         } catch (QiniuException e) {
             throw new RuntimeException("上传失败：" + e.response.toString());
         }
@@ -55,7 +56,9 @@ public class QiniuService {
 
             List<String> urls = new ArrayList<>();
             for (FileInfo fileInfo : fileListing.items) {
-                urls.add(config.getDomain() + "/" + java.net.URLEncoder.encode(fileInfo.key, "UTF-8").replace("+", "%20"));
+                // 修复：添加HTTP协议前缀，并正确处理URL编码
+                String encodedKey = java.net.URLEncoder.encode(fileInfo.key, "UTF-8").replace("+", "%20");
+                urls.add("http://" + config.getDomain() + "/" + encodedKey);
             }
             return urls;
         } catch (Exception e) {
@@ -69,7 +72,8 @@ public class QiniuService {
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
         try {
             String encodedFileName = java.net.URLEncoder.encode(fileName, "UTF-8").replace("+", "%20");
-            String downloadUrl = String.format("%s/%s", config.getDomain(), encodedFileName);
+            // 修复：添加HTTP协议前缀
+            String downloadUrl = String.format("http://%s/%s", config.getDomain(), encodedFileName);
             return new java.net.URL(downloadUrl).openStream();
         } catch (IOException e) {
             throw new RuntimeException("文件下载失败：" + e.getMessage(), e);
