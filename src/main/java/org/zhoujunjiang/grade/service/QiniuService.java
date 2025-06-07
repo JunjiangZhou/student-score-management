@@ -45,6 +45,7 @@ public class QiniuService {
             throw new RuntimeException("上传失败：" + e.response.toString());
         }
     }
+
     public List<String> listFileUrls() {
         Configuration cfg = new Configuration(Region.huadong());
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
@@ -54,12 +55,24 @@ public class QiniuService {
 
             List<String> urls = new ArrayList<>();
             for (FileInfo fileInfo : fileListing.items) {
-                urls.add(config.getDomain() + "/" + fileInfo.key);
+                urls.add(config.getDomain() + "/" + java.net.URLEncoder.encode(fileInfo.key, "UTF-8").replace("+", "%20"));
             }
             return urls;
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    public java.io.InputStream download(String fileName) {
+        Configuration cfg = new Configuration(Region.huadong());
+        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
+        try {
+            String encodedFileName = java.net.URLEncoder.encode(fileName, "UTF-8").replace("+", "%20");
+            String downloadUrl = String.format("%s/%s", config.getDomain(), encodedFileName);
+            return new java.net.URL(downloadUrl).openStream();
+        } catch (IOException e) {
+            throw new RuntimeException("文件下载失败：" + e.getMessage(), e);
         }
     }
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +23,9 @@
     </c:if>
 
     <ul>
-        <c:forEach var="url" items="${fileUrls}">
+        <c:forEach var="file" items="${fileList}">
             <li>
-                <a href="${url}" target="_blank">${url}</a>
+                <a href="${file.url}" target="_blank">${file.name}</a>
             </li>
         </c:forEach>
     </ul>
