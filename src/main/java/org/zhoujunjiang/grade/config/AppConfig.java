@@ -26,7 +26,7 @@ public class AppConfig {
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/student_grade_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai");
         ds.setUsername("root");
-        ds.setPassword("Mysql4mypj");
+        ds.setPassword("");
         ds.setMaxTotal(20);
         ds.setMaxIdle(5);
         return ds;
