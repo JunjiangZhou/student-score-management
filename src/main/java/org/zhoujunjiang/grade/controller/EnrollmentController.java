@@ -26,20 +26,20 @@ public class EnrollmentController {
     @GetMapping
     public String listCourses(Model model) {
         List<CourseEnrollmentSummaryVO> courseList = enrollmentService.findAllCoursesWithEnrollment();
-        model.addAttribute("courses", courseList);
+        model.addAttribute("courseList", courseList);
         return "enrollments";  // enrollments.jsp
     }
 
-    @GetMapping("/course/{courseId}")
+    @GetMapping("/detail/{courseId}")
     public String listStudentsByCourse(@PathVariable Integer courseId, Model model) {
         List<EnrollmentDetailVO> students = enrollmentService.findStudentsByCourseId(courseId);
-        model.addAttribute("students", students);
+        model.addAttribute("studentList", students);
         return "enrollment-detail"; // enrollment-detail.jsp
     }
     @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("students", studentService.findAll());
-        model.addAttribute("courses", courseService.findAll());
+        model.addAttribute("courses", enrollmentService.findAllCoursesWithEnrollment());
         return "enrollment-form";
     }
 

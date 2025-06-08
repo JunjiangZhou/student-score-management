@@ -23,7 +23,7 @@
     学分：<input type="text" name="credit" value="${course.credit}" required/><br/>
     学期：<input type="text" name="semester" value="${course.semester}" required/><br/>
     所属学院：<input type="text" name="department" value="${course.department}" required/><br/>
-
+    学时：<input type="text" name="hours" value="${course.hours}" required/><br/>
     教师：
     <select name="teacherId">
         <c:forEach var="teacher" items="${teacherList}">

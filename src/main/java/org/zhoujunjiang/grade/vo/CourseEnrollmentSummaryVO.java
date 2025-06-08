@@ -7,4 +7,5 @@ public class CourseEnrollmentSummaryVO {
     private Integer courseId;
     private String courseName;
     private String teacherName;
+    private Integer enrollmentCount;
 }

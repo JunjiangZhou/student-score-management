@@ -8,7 +8,7 @@
     <resultMap id="TeacherResultMap" type="org.zhoujunjiang.grade.entity.Teacher">
         <id property="id" column="id" />
         <result property="name" column="name" />
-        <result property="teacherNo" column="teacher_no" />
+        <result property="teacherNo" column="teacherNo" />
         <result property="department" column="department" />
         <result property="age" column="age" />
         <result property="gender" column="gender" />
@@ -26,14 +26,14 @@
     </select>
 
     <insert id="insert" parameterType="org.zhoujunjiang.grade.entity.Teacher">
-        INSERT INTO teacher (name, teacher_no, department, age, gender, title, email, hire_date)
+        INSERT INTO teacher (name, teacherNo, department, age, gender, title, email, hire_date)
         VALUES (#{name}, #{teacherNo}, #{department}, #{age}, #{gender}, #{title}, #{email}, #{hire_Date})
     </insert>
 
     <update id="update" parameterType="org.zhoujunjiang.grade.entity.Teacher">
         UPDATE teacher
         SET name = #{name},
-            teacher_no = #{teacherNo},
+            teacherNo = #{teacherNo},
             department = #{department},
             age = #{age},
             gender = #{gender},

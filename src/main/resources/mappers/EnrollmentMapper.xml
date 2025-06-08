@@ -39,7 +39,7 @@
     <select id="findStudentsByCourseId" resultType="org.zhoujunjiang.grade.vo.EnrollmentDetailVO">
         SELECT s.id AS studentId,
                s.name AS studentName,
-               s.student_no AS studentNo
+               s.studentNo AS studentNo
         FROM enrollment e
                  JOIN student s ON e.student_id = s.id
         WHERE e.course_id = #{courseId}

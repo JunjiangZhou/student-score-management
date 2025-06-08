@@ -26,7 +26,7 @@
     课程：
     <select name="courseId" required>
         <c:forEach var="course" items="${courses}">
-            <option value="${course.id}">${course.name}（${course.teacherName}）</option>
+            <option value="${course.courseId}">${course.courseName}（${course.teacherName}）</option>
         </c:forEach>
     </select><br/><br/>
 
