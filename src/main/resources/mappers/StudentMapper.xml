@@ -34,10 +34,10 @@
     <!-- 更新学生 -->
     <update id="update" parameterType="org.zhoujunjiang.grade.entity.Student">
         UPDATE student
-        SET student_no = #{studentNo},
+        SET studentNo = #{studentNo},
             name = #{name},
             gender = #{gender},
-            class_name = #{className},
+            className = #{className},
             email = #{email},
             age = #{age}
         WHERE id = #{id}
